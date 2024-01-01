@@ -19,9 +19,9 @@ export function validationPinRequest(schema: ObjectSchema) {
 export const Schemas = {
   data: Joi.object<PinRequestBody>({
     username: Joi.string().alphanum().min(3).max(15).required(),
-    title: Joi.string(),
+    title: Joi.string().required(),
     desc: Joi.string(),
-    rating: Joi.number().integer().min(0).max(5).required(),
+    rating: Joi.number().integer().min(0).max(5),
     lat: Joi.number().required(),
     long: Joi.number().required(),
   }),

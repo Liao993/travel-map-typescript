@@ -10,9 +10,11 @@ const useFetch = () => {
       try {
         const received_data = await getAllpins(); // Call the imported function to get json data
         setData(received_data);
+
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         alert(error.message);
+        throw error;
       }
     }
 

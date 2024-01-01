@@ -1,17 +1,18 @@
 import Map, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-//import useFetch from "../../hooks/useFetch";
-import { Pin } from "../../shared/types";
+import useFetch from "../../hooks/useFetch";
+//import { Pin } from "../../shared/types";
 
-import ObjectId from "bson-objectid";
+//import ObjectId from "bson-objectid";
 import PopupBox from "./PopupBox";
 
 const Maps = () => {
-  //const { data } = useFetch();
-
+  const { data } = useFetch();
+  console.log(data);
+  /*
   const generateObjectId = (): ObjectId => new ObjectId();
-
+ 
   const jsonData: Pin[] = [
     {
       _id: generateObjectId(),
@@ -50,7 +51,7 @@ const Maps = () => {
       title: "Greenwich, Prince Edward Island National Park",
     },
   ];
-
+*/
   return (
     <div>
       <Map
@@ -63,17 +64,18 @@ const Maps = () => {
         style={{ width: 1000, height: 1000 }}
         mapStyle="mapbox://styles/mapbox/streets-v9"
       >
-        {jsonData.map((p) => (
-          <div key={p._id.toHexString()}>
-            <Marker
-              longitude={p.long}
-              latitude={p.lat}
-              anchor="bottom"
-              color="red"
-            ></Marker>
-            <PopupBox long={p.long} lat={p.lat} title={p.title} />
-          </div>
-        ))}
+        {data &&
+          data.map((p) => (
+            <div key={p._id}>
+              <Marker
+                longitude={p.long}
+                latitude={p.lat}
+                anchor="bottom"
+                color="red"
+              ></Marker>
+              <PopupBox long={p.long} lat={p.lat} title={p.title} />
+            </div>
+          ))}
       </Map>
     </div>
   );
