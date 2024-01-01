@@ -1,14 +1,13 @@
-//import axios from "axios";
-import { Pin } from "../shared/types";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export async function getAllpins(): Promise<Pin[]> {
+export const getAllpins = createAsyncThunk("pin/getallAsync", async () => {
   try {
     const response = await fetch("http://localhost:5000/pin");
-    const json: Pin[] = await response.json();
+    const pin = await response.json();
 
-    return json;
+    return pin;
   } catch (error) {
     console.log(error);
     throw error;
   }
-}
+});

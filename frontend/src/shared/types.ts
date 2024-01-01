@@ -1,7 +1,7 @@
-import ObjectId from "bson-objectid";
+import ObjectID from "bson-objectid";
 
 export interface Pin {
-  _id: ObjectId;
+  _id: ObjectID;
   title?: string;
   description?: string;
   rating?: number;

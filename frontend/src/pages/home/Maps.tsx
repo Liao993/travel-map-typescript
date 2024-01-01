@@ -1,57 +1,31 @@
 import Map, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-import useFetch from "../../hooks/useFetch";
-//import { Pin } from "../../shared/types";
+import { Pin } from "../../shared/types";
 
-//import ObjectId from "bson-objectid";
 import PopupBox from "./PopupBox";
+import { userSelector } from "../../redux/pinSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/hook";
+import { useEffect, useState } from "react";
+import { getAllpins } from "../../services/JsonServerClient";
 
 const Maps = () => {
-  const { data } = useFetch();
-  console.log(data);
-  /*
-  const generateObjectId = (): ObjectId => new ObjectId();
- 
-  const jsonData: Pin[] = [
-    {
-      _id: generateObjectId(),
-      long: -63.1389,
-      lat: 46.2569,
-      title: "University of Prince Edward Island",
-    },
-    {
-      _id: generateObjectId(),
-      long: -63.0738,
-      lat: 46.2169,
-      title: "Charlottetown Library",
-    },
-    {
-      _id: generateObjectId(),
-      long: -63.129166,
-      lat: 46.238888,
-      title: "Stratford Gym",
-    },
-    {
-      _id: generateObjectId(),
-      long: -62.6519,
-      lat: 46.1693,
-      title: "Three Rivers Town Hall",
-    },
-    {
-      _id: generateObjectId(),
-      long: -63.19778,
-      lat: 46.41756,
-      title: "The Dunes Studio Gallery & Cafe",
-    },
-    {
-      _id: generateObjectId(),
-      long: -62.70269,
-      lat: 46.4443,
-      title: "Greenwich, Prince Edward Island National Park",
-    },
-  ];
-*/
+  const [pin, setPin] = useState<Pin[]>();
+  //const { mypin } = useAppSelector(userSelector);
+  //console.log(mypin);
+  const selectedUsers = useAppSelector(userSelector);
+  const dispatch = useAppDispatch();
+
+  //get data from state
+  useEffect(() => {
+    // Fetch data only once when the component mounts
+    dispatch(getAllpins());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setPin(selectedUsers.pin);
+  }, [selectedUsers]);
+
   return (
     <div>
       <Map
@@ -64,8 +38,8 @@ const Maps = () => {
         style={{ width: 1000, height: 1000 }}
         mapStyle="mapbox://styles/mapbox/streets-v9"
       >
-        {data &&
-          data.map((p) => (
+        {pin &&
+          pin.map((p) => (
             <div key={p._id}>
               <Marker
                 longitude={p.long}
