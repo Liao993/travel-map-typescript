@@ -11,8 +11,7 @@ import { Pin } from "../../shared/types";
 // other components
 import PopupBox from "./PopupBox";
 import AddSpot from "./AddSpot";
-import { userSelector } from "../../redux/pinSlice";
-import { useAppDispatch, useAppSelector } from "../../hooks/hook";
+import { useAppSelector, useAppDispatch } from "../../redux/store";
 
 // data server api
 import { getAllpins } from "../../services/JsonServerClient";
@@ -27,12 +26,10 @@ const Maps = () => {
   const sindycolor = "#ED2939";
 
   //Add Click
-  const handleAddClick = (e): void => {
-    console.log(e);
+  const handleAddClick = (e: { lngLat: { lng: number; lat: number } }) => {
     const long = e.lngLat.lng;
     const lat = e.lngLat.lat;
-    console.log("long", long);
-    console.log("lat", lat);
+
     setNewLat(lat);
     setNewLong(long);
   };
@@ -42,7 +39,7 @@ const Maps = () => {
   };
 
   // get Data
-  const selectedUsers = useAppSelector(userSelector);
+  const selectedUsers = useAppSelector((state) => state.pin.pins);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -50,7 +47,7 @@ const Maps = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    setPin(selectedUsers.pin);
+    setPin(selectedUsers);
   }, [selectedUsers]);
 
   return (

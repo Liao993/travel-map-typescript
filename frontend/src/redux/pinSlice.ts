@@ -1,16 +1,14 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-import { RootState } from "../redux/store";
-
-import { getAllpins } from "../services/JsonServerClient";
+import { getAllpins, addData } from "../services/JsonServerClient";
 
 import { Pin } from "../shared/types";
 
 export interface PinState {
-  pin: Pin[];
+  pins: Pin[];
 }
 const initialState: PinState = {
-  pin: [],
+  pins: [],
 };
 
 const pinSlice = createSlice({
@@ -22,14 +20,39 @@ const pinSlice = createSlice({
       .addCase(getAllpins.pending, () => {
         console.log("fetching data now");
       })
-      .addCase(getAllpins.fulfilled, (state, action: PayloadAction<Pin[]>) => {
-        state.pin = action.payload;
+      .addCase(getAllpins.fulfilled, (state, action) => {
+        state.pins = action.payload;
       })
       .addCase(getAllpins.rejected, (state) => {
-        state.pin = [];
+        state.pins = [];
+      })
+      .addCase(addData.fulfilled, (state, action) => {
+        state.pins.push(action.payload);
       });
   },
 });
 
-export const userSelector = (state: RootState) => state.pinReducer;
+//export const { addNewPin } = pinSlice.actions;
+//export const userSelector = (state: RootState) => state.pinReducer;
 export default pinSlice.reducer;
+
+/*
+  addNewPin: (state, action: PayloadAction<Pin>) => {
+      state.pins.push({
+        title: action.payload.title,
+        lat: action.payload.lat,
+        long: action.payload.long,
+      });
+    },
+
+const test: Pin = {
+  username: "Sindy",
+  title: "good",
+  rating: Number("5"),
+  description: "good job",
+  lat: 46,
+  long: 23,
+};
+
+
+*/
