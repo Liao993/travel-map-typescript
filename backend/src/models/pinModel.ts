@@ -1,5 +1,5 @@
-import { Timestamp } from "mongodb";
 import mongoose from "mongoose";
+import { PinRequestBody } from "../types/pin";
 
 const PinSchema = new mongoose.Schema(
   {
@@ -36,6 +36,6 @@ const PinSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const pinModel = mongoose.model("Pins", PinSchema);
+const pinModel = mongoose.model<PinRequestBody>("Pins", PinSchema);
 
 export default pinModel;

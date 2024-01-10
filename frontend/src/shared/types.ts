@@ -2,7 +2,7 @@ export interface Pin {
   _id?: string;
   username?: string;
   title?: string;
-  description?: string;
+  desc?: string;
   rating?: number;
   long: number;
   lat: number;
@@ -12,7 +12,7 @@ export interface Pin {
 export interface PopupBoxProps {
   username?: string;
   title?: string;
-  description?: string;
+  desc?: string;
   rating?: number;
   long: number;
   lat: number;

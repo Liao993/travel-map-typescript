@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-import { PinRouter } from "./routes";
+import { PinRouter, RegisterRouter, LoginRouter } from "./routes";
 
 dotenv.config();
 
@@ -17,6 +17,8 @@ app.use(
 );
 
 app.use("/pin", PinRouter);
+app.use("/register", RegisterRouter);
+app.use("/login", LoginRouter);
 
 mongoose
   .connect(process.env.MONGO_URL || "")

@@ -18,15 +18,16 @@ import { getAllpins } from "../../services/JsonServerClient";
 
 const Maps = () => {
   const [pin, setPin] = useState<Pin[] | null>();
-  const [newLong, setNewLong] = useState<number | null>();
-  const [newLat, setNewLat] = useState<number | null>();
+  const [newLong, setNewLong] = useState<number | null>(null);
+  const [newLat, setNewLat] = useState<number | null>(null);
 
   const [currentPlaceId, setCurrentPlaceId] = useState<string | undefined>();
   const currentUser = "Sindy";
   const sindycolor = "#ED2939";
 
   //Add Click
-  const handleAddClick = (e: { lngLat: { lng: number; lat: number } }) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleAddClick = (e: any) => {
     const long = e.lngLat.lng;
     const lat = e.lngLat.lat;
 
@@ -82,7 +83,9 @@ const Maps = () => {
                   lat={p.lat}
                   title={p.title}
                   username={p.username}
+                  desc={p.desc}
                   createdAt={p.createdAt}
+                  rating={p.rating}
                 />
               )}
             </div>

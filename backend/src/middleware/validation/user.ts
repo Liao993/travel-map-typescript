@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from "express";
-import { PinRequestBody } from "../../types/pin";
+import { UserRequestBody } from "../../types/user";
 import { ObjectSchema } from "joi";
 import Joi from "joi";
 
-export function validationPinRequest(schema: ObjectSchema) {
+export function validationUserRequest(schema: ObjectSchema) {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       await schema.validateAsync(req.body);
@@ -17,12 +17,9 @@ export function validationPinRequest(schema: ObjectSchema) {
 }
 
 export const Schemas = {
-  data: Joi.object<PinRequestBody>({
-    username: Joi.string().alphanum().min(3).max(15),
-    title: Joi.string().required(),
-    desc: Joi.string(),
-    rating: Joi.number().integer().min(0).max(5),
-    lat: Joi.number().required(),
-    long: Joi.number().required(),
+  data: Joi.object<UserRequestBody>({
+    username: Joi.string().alphanum().min(3).max(20),
+    email: Joi.string().required().max(50),
+    password: Joi.string().required().min(6),
   }),
 };

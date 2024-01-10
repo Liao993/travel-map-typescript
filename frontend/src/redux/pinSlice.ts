@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { getAllpins, addData } from "../services/JsonServerClient";
 
@@ -32,27 +32,17 @@ const pinSlice = createSlice({
   },
 });
 
-//export const { addNewPin } = pinSlice.actions;
-//export const userSelector = (state: RootState) => state.pinReducer;
 export default pinSlice.reducer;
 
 /*
-  addNewPin: (state, action: PayloadAction<Pin>) => {
+  addPerson: (state, action: PayloadAction<Pin>) => {
       state.pins.push({
+        username: action.payload.username,
         title: action.payload.title,
+        desc: action.payload.desc,
+        rating: action.payload.rating,
         lat: action.payload.lat,
         long: action.payload.long,
       });
     },
-
-const test: Pin = {
-  username: "Sindy",
-  title: "good",
-  rating: Number("5"),
-  description: "good job",
-  lat: 46,
-  long: 23,
-};
-
-
 */

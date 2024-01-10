@@ -1,6 +1,5 @@
 import { Popup } from "react-map-gl";
 
-import { Pin } from "../../shared/types";
 import { useState } from "react";
 
 import { useAppDispatch } from "../../redux/store";
@@ -8,28 +7,32 @@ import { useAppDispatch } from "../../redux/store";
 //import { addNewPin } from "../../redux/pinSlice";
 import { addData } from "../../services/JsonServerClient";
 
-const AddSpot = ({ long, lat }: Pin) => {
+interface AddSpotProps {
+  long: number;
+  lat: number;
+}
+
+const AddSpot = ({ long, lat }: AddSpotProps) => {
   const label_style: string = "text-orange-500 text-sm max-w-max  mr-3 mb-2";
 
   const [title, setTitle] = useState<string>("");
-  //const [description, setDescription] = useState<string>("");
-  //const [rating, setRating] = useState<number | string>(0);
+  const [desc, setDesc] = useState<string>("");
+  const [rating, setRating] = useState<number | string>(0);
 
   const dispatch = useAppDispatch();
 
-  const addNewPinSubmit = (e: { preventDefault: () => void }) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const addNewPinSubmit = (e: any) => {
     e.preventDefault();
     const newPin = {
-      //username: "Henry",
+      username: "Sindy",
       title: title,
-      //rating: Number(rating),
-      //description: description,
+      rating: Number(rating),
+      desc: desc,
       lat: lat,
       long: long,
     };
-    console.log("new pin", newPin);
-    console.log(typeof newPin);
-    //console.log("rating type", typeof rating);
+
     dispatch(addData(newPin));
   };
 
@@ -39,7 +42,7 @@ const AddSpot = ({ long, lat }: Pin) => {
       latitude={lat}
       anchor="left"
       closeButton={true}
-      closeOnClick={false}
+      closeOnClick={true}
     >
       <div>
         <form
@@ -57,9 +60,13 @@ const AddSpot = ({ long, lat }: Pin) => {
             placeholder="Something about this place"
             rows={5}
             className="border-2 mb-2"
+            onChange={(e) => setDesc(e.target.value)}
           />
           <label className={label_style}>Rating</label>
-          <select className="border-2 mb-4">
+          <select
+            className="border-2 mb-4"
+            onChange={(e) => setRating(e.target.value)}
+          >
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
