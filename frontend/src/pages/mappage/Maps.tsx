@@ -14,7 +14,7 @@ import AddSpot from "./AddSpot";
 import { useAppSelector, useAppDispatch } from "../../redux/store";
 
 // data server api
-import { getAllpins } from "../../services/JsonServerClient";
+import { getAllpins } from "../../services/PinJsonServerClient";
 
 const Maps = () => {
   const [pin, setPin] = useState<Pin[] | null>();
@@ -91,6 +91,20 @@ const Maps = () => {
             </div>
           ))}
         {newLong && newLat && <AddSpot long={newLong} lat={newLat} />}
+        {/*
+        {currentUser && (
+          <div className="flex flex-row gap-8 justify-end items-center">
+            <span className="text-xl mx-2 py-2">Welcome {currentUser} !</span>
+            <button className="mr-3">Log Out</button>
+          </div>
+        )}
+        {!currentUser && (
+          <div className="flex flex-row gap-8 justify-end items-center py-2 mr-5">
+            <button className="p-2">Register</button>
+            <button>Log In</button>
+          </div>
+        )}
+        */}
       </Map>
     </div>
   );

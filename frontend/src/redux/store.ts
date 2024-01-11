@@ -1,10 +1,12 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import pinReducer from "./pinSlice";
+import userReducer from "./userSlice";
 
 export const store = configureStore({
   reducer: {
     pin: pinReducer,
+    user: userReducer,
   },
 });
 

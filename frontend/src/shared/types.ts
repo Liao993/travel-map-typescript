@@ -9,6 +9,13 @@ export interface Pin {
   createdAt?: Date;
 }
 
+export interface User {
+  _id?: string;
+  username?: string;
+  email?: string;
+  password?: string;
+}
+
 export interface PopupBoxProps {
   username?: string;
   title?: string;

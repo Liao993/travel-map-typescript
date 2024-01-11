@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useAppDispatch } from "../../redux/store";
 
 //import { addNewPin } from "../../redux/pinSlice";
-import { addData } from "../../services/JsonServerClient";
+import { addData } from "../../services/PinJsonServerClient";
 
 interface AddSpotProps {
   long: number;

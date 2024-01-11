@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-import { getAllpins, addData } from "../services/JsonServerClient";
+import { getAllpins, addData } from "../services/PinJsonServerClient";
 
 import { Pin } from "../shared/types";
 

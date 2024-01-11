@@ -12,25 +12,6 @@ export const getAllpins = createAsyncThunk("pin/getallAsync", async () => {
     throw error;
   }
 });
-/*
-export const addData = createAsyncThunk(
-  "pin/createpinAsync",
-  async (data: Pin) => {
-    const response = await fetch("http://localhost:5000/pin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    if (response.ok) {
-      const pin = await response.json();
-      console.log("pin", pin);
-      return { pin };
-    }
-  }
-);
-*/
 
 export const addData = createAsyncThunk(
   "pin/createpinAsync",
